@@ -15,10 +15,9 @@ const App = () => {
 
             let day = "AM";
             if (hours >= 12) {
-                hours = 24 - hours;
+                hours = 12 - (24 - hours);
                 day = "PM";
             }
-            hours = hours < 10 ? "0" + hours : hours;
             let minutes = date.getMinutes();
             minutes = minutes < 10 ? "0" + minutes : minutes;
             let seconds = date.getSeconds();
