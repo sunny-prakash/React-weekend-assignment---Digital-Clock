@@ -35,7 +35,7 @@ const App = () => {
     return (
         <div>
             <div className="Clock">
-                <h3 id="time">{`${hours} : ${minutes} : ${seconds} ${day}`}</h3>
+                <h3 id="time">{`${hours}:${minutes}:${seconds} ${day}`}</h3>
             </div>
         </div>
     );
