@@ -12,11 +12,11 @@ const App = () => {
         timerID = setInterval(() => {
             let date = new Date();
             let hours = date.getHours();
-
+            // console.log(hours);
             let day = "AM";
-            if (hours >= 12) {
+            if (hours >= 12) day = "PM";
+            if (hours > 12) {
                 hours = 12 - (24 - hours);
-                day = "PM";
             }
             let minutes = date.getMinutes();
             minutes = minutes < 10 ? "0" + minutes : minutes;
