@@ -2,41 +2,40 @@ import React, { Component, useState, useEffect } from "react";
 import "../styles/App.css";
 
 const App = () => {
-    const [hours, setHours] = useState("00");
-    const [minutes, setMinutes] = useState("00");
-    const [seconds, setSeconds] = useState("00");
+    const [hours, setHours] = useState(0);
+    const [minutes, setMinutes] = useState(0);
+    const [seconds, setSeconds] = useState(0);
     const [day, setDay] = useState("");
+    const [timerID, settimerID] = useState(null);
 
-    var timerID;
     useEffect(() => {
-        timerID = setInterval(() => {
-            let date = new Date();
-            let hours = date.getHours();
-            // console.log(hours);
-            let day = "AM";
-            if (hours >= 12) day = "PM";
-            if (hours > 12) {
-                hours = 12 - (24 - hours);
-            }
-            let minutes = date.getMinutes();
-            minutes = minutes < 10 ? "0" + minutes : minutes;
-            let seconds = date.getSeconds();
-            seconds = seconds < 10 ? "0" + seconds : seconds;
-            setHours(hours);
-            setMinutes(minutes);
-            setSeconds(seconds);
-            setDay(day);
-        }, 1000);
+        settimerID(
+            setInterval(() => {
+                let date = new Date();
+                let hours = date.getHours();
+                let minutes = date.getMinutes();
+                let seconds = date.getSeconds();
+                let day = hours >= 12 ? "PM" : "AM";
+                if (hours > 12) {
+                    hours = 12 - (24 - hours);
+                }
+                minutes = minutes < 10 ? "0" + minutes : minutes;
+                seconds = seconds < 10 ? "0" + seconds : seconds;
+                // console.log(typeof hours, typeof minutes, typeof seconds);
+                setHours(hours);
+                setMinutes(minutes);
+                setSeconds(seconds);
+                setDay(day);
+            }, 1000)
+        );
         return () => {
             clearInterval(timerID);
         };
     }, []);
 
     return (
-        <div>
-            <div className="Clock">
-                <h3 id="time">{`${hours}:${minutes}:${seconds} ${day}`}</h3>
-            </div>
+        <div className="Clock">
+            <h3 id="time">{`${hours}:${minutes}:${seconds} ${day}`}</h3>
         </div>
     );
 };
