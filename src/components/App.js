@@ -9,18 +9,27 @@ const App = () => {
     const [timerID, settimerID] = useState(null);
 
     useEffect(() => {
+        let date = new Date();
+        let hours = date.getHours();
+        let minutes = date.getMinutes();
+        let seconds = date.getSeconds();
+        let day = hours >= 12 ? "PM" : "AM";
         settimerID(
             setInterval(() => {
-                let date = new Date();
-                let hours = date.getHours();
-                let minutes = date.getMinutes();
-                let seconds = date.getSeconds();
-                let day = hours >= 12 ? "PM" : "AM";
+                seconds++;
+                if (seconds === 60) {
+                    minutes++;
+                    seconds = 0;
+                }
+                if (minutes === 60) {
+                    hours++;
+                    minutes = 0;
+                }
                 if (hours > 12) {
                     hours = 12 - (24 - hours);
                 }
-                minutes = minutes < 10 ? "0" + minutes : minutes;
-                seconds = seconds < 10 ? "0" + seconds : seconds;
+                minutes = minutes < 10 ? "0" + Number(minutes) : Number(minutes);
+                seconds = seconds < 10 ? "0" + Number(seconds) : Number(seconds);
                 // console.log(typeof hours, typeof minutes, typeof seconds);
                 setHours(hours);
                 setMinutes(minutes);
